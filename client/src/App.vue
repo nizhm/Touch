@@ -1,17 +1,44 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HelloWorld
+      v-if="unLogin"
+      @login="login"
+    />
+    <StillPictureCapture
+      v-else
+      @logout="logout"
+    />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from '@/components/HelloWorld'
+import StillPictureCapture from '@/components/StillPictureCapture'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
+    StillPictureCapture
+  },
+  data() {
+    return {
+      unLogin: true,
+      storageKey: 'unLogin'
+    }
+  },
+  methods: {
+    login() {
+      this.unLogin = false
+      window.sessionStorage.setItem(this.storageKey, 'false')
+    },
+    logout() {
+      this.unLogin = true
+      window.sessionStorage.setItem(this.storageKey, 'true')
+    }
+  },
+  created() {
+    this.unLogin = window.sessionStorage.getItem(this.storageKey) !== 'false'
   }
 }
 </script>
