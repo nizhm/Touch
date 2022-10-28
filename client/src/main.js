@@ -5,8 +5,11 @@ import store from './store'
 
 Vue.config.productionTip = false
 
-new Vue({
+const vue = new Vue({
+  el: '#app',
   router,
   store,
   render: h => h(App)
-}).$mount('#app')
+})
+
+export default vue
