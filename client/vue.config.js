@@ -3,5 +3,8 @@ const path = require('path')
 
 module.exports = defineConfig({
   transpileDependencies: true,
-  outputDir: path.resolve(__dirname, '../server/public/client')
+  outputDir: path.resolve(__dirname, '../server/public/client'),
+  devServer: {
+    https: true
+  }
 })
