@@ -33,7 +33,7 @@
 export default {
   name: 'StillPictureCapture',
   methods: {
-    initCamera() {
+    initCamera () {
       // The width and height of the captured photo. We will set the
       // width to the value defined here, but the height will be
       // calculated based on the aspect ratio of the input stream.
@@ -54,29 +54,29 @@ export default {
       let photo = null
       let startbutton = null
 
-      function showViewLiveResultButton() {
+      function showViewLiveResultButton () {
         if (window.self !== window.top) {
           // Ensure that if our document is in a frame, we get the user
           // to first open it in its own tab or window. Otherwise, it
           // won't be able to request permission for camera access.
-          document.querySelector(".contentarea").remove()
-          const button = document.createElement("button")
-          button.textContent = "View live result of the example code above"
+          document.querySelector('.contentarea').remove()
+          const button = document.createElement('button')
+          button.textContent = 'View live result of the example code above'
           document.body.append(button)
-          button.addEventListener("click", () => window.open(location.href))
+          button.addEventListener('click', () => window.open(location.href))
           return true
         }
         return false
       }
 
-      function startup() {
+      function startup () {
         if (showViewLiveResultButton()) {
           return
         }
-        video = document.getElementById("video")
-        canvas = document.getElementById("canvas")
-        photo = document.getElementById("photo")
-        startbutton = document.getElementById("startbutton")
+        video = document.getElementById('video')
+        canvas = document.getElementById('canvas')
+        photo = document.getElementById('photo')
+        startbutton = document.getElementById('startbutton')
 
         navigator.mediaDevices
           .getUserMedia({ video: true, audio: false })
@@ -89,7 +89,7 @@ export default {
           })
 
         video.addEventListener(
-          "canplay",
+          'canplay',
           (ev) => {
             if (!streaming) {
               height = video.videoHeight / (video.videoWidth / width)
@@ -101,10 +101,10 @@ export default {
                 height = width / (4 / 3)
               }
 
-              video.setAttribute("width", width)
-              video.setAttribute("height", height)
-              canvas.setAttribute("width", width)
-              canvas.setAttribute("height", height)
+              video.setAttribute('width', width)
+              video.setAttribute('height', height)
+              canvas.setAttribute('width', width)
+              canvas.setAttribute('height', height)
               streaming = true
             }
           },
@@ -112,7 +112,7 @@ export default {
         )
 
         startbutton.addEventListener(
-          "click",
+          'click',
           (ev) => {
             takepicture()
             ev.preventDefault()
@@ -126,13 +126,13 @@ export default {
       // Fill the photo with an indication that none has been
       // captured.
 
-      function clearphoto() {
-        const context = canvas.getContext("2d")
-        context.fillStyle = "#AAA"
+      function clearphoto () {
+        const context = canvas.getContext('2d')
+        context.fillStyle = '#AAA'
         context.fillRect(0, 0, canvas.width, canvas.height)
 
-        const data = canvas.toDataURL("image/png")
-        photo.setAttribute("src", data)
+        const data = canvas.toDataURL('image/png')
+        photo.setAttribute('src', data)
       }
 
       // Capture a photo by fetching the current contents of the video
@@ -141,15 +141,15 @@ export default {
       // drawing that to the screen, we can change its size and/or apply
       // other changes before drawing it.
 
-      function takepicture() {
-        const context = canvas.getContext("2d")
+      function takepicture () {
+        const context = canvas.getContext('2d')
         if (width && height) {
           canvas.width = width
           canvas.height = height
           context.drawImage(video, 0, 0, width, height)
 
-          const data = canvas.toDataURL("image/png")
-          photo.setAttribute("src", data)
+          const data = canvas.toDataURL('image/png')
+          photo.setAttribute('src', data)
         } else {
           clearphoto()
         }
@@ -157,10 +157,10 @@ export default {
 
       // Set up our event listener to run the startup process
       // once loading is complete.
-      window.addEventListener("load", startup, false)
+      window.addEventListener('load', startup, false)
     }
   },
-  created() {
+  created () {
     this.initCamera()
   }
 }
