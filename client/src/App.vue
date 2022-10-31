@@ -1,12 +1,18 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/" @click="submitLogout">Logout</router-link>
+<!--      <router-link to="/" @click="submitLogout">Logout</router-link>-->
       <template v-if="hasLogin">
         <span> | </span>
-        <router-link to="/home">Home</router-link>
+        <router-link to="/home">Devices</router-link>
+        <span> | </span>
+        <router-link to="/video-call">VideoCall</router-link>
         <span> | </span>
         <router-link to="/video">Video</router-link>
+        <span> | </span>
+        <router-link to="/audio">Audio</router-link>
+        <span> | </span>
+        <router-link to="/screen">Screen</router-link>
       </template>
     </nav>
     <router-view/>
@@ -23,18 +29,19 @@ export default {
   },
   methods: {
     submitLogout() {
-      window.sessionStorage.getItem('token')
+      window.sessionStorage.removeItem('token')
       window.location.reload()
     }
   },
   created() {
-    const token = window.sessionStorage.getItem('token')
-    if (!token) {
-      this.$router.push({ name: 'login' })
-    } else {
-      this.hasLogin = true
-      this.$router.push({ name: 'home' })
-    }
+    this.hasLogin = true
+    // const token = window.sessionStorage.getItem('token')
+    // if (!token) {
+    //   this.hasLogin = false
+    //   this.$router.push({ name: 'login' })
+    // } else {
+    //   this.hasLogin = true
+    // }
   }
 }
 </script>

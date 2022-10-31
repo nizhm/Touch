@@ -1,18 +1,55 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <p class="total">
+      <span>Total:</span>
+      <span>{{ devicesList.length }}</span>
+    </p>
+    <ul class="devices">
+      <li
+        v-for="(device, idx) in devicesList"
+        :key="idx"
+        class="device-item"
+      >
+        <span>{{ device.toJSON() }}</span>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'HomeView',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      devicesList: []
+    }
+  },
+  async created() {
+    let list = null
+    try {
+      list = await navigator.mediaDevices.enumerateDevices()
+      this.devicesList = list
+    } catch (e) {
+      console.error(e)
+      alert(e.message)
+    }
   }
 }
 </script>
+
+<style>
+  .home {
+    width: 1200px;
+    margin: 0 auto;
+  }
+  .home .total {
+    text-align: left;
+    padding-left: 20px;
+  }
+  .home .device-item {
+    text-align: left;
+    line-height: 32px;
+    height: 64px;
+  }
+</style>

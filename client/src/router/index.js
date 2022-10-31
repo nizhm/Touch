@@ -15,9 +15,24 @@ const routes = [
     component: () => import('../views/HomeView')
   },
   {
+    path: '/video-call',
+    name: 'video-call',
+    component: () => import('../views/media/StillPictureCapture')
+  },
+  {
     path: '/video',
     name: 'video',
-    component: () => import('../views/StillPictureCapture')
+    component: () => import('../views/media/VideoCapture')
+  },
+  {
+    path: '/audio',
+    name: 'audio',
+    component: () => import('../views/media/AudioCapture')
+  },
+  {
+    path: '/screen',
+    name: 'screen',
+    component: () => import('../views/media/ScreenCapture')
   }
 ]
 
