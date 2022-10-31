@@ -1,30 +1,42 @@
 <template>
   <div id="app">
-    <nav>
+<!--    <nav>-->
 <!--      <router-link to="/" @click="submitLogout">Logout</router-link>-->
-      <template v-if="hasLogin">
-        <span> | </span>
-        <router-link to="/home">Devices</router-link>
-        <span> | </span>
-        <router-link to="/video-call">VideoCall</router-link>
-        <span> | </span>
-        <router-link to="/video">Video</router-link>
-        <span> | </span>
-        <router-link to="/audio">Audio</router-link>
-        <span> | </span>
-        <router-link to="/screen">Screen</router-link>
-      </template>
-    </nav>
+<!--      <template v-if="hasLogin">-->
+<!--        <span> | </span>-->
+<!--        <router-link to="/home">Devices</router-link>-->
+<!--        <span> | </span>-->
+<!--        <router-link to="/video-call">VideoCall</router-link>-->
+<!--        <span> | </span>-->
+<!--        <router-link to="/video">Video</router-link>-->
+<!--        <span> | </span>-->
+<!--        <router-link to="/audio">Audio</router-link>-->
+<!--        <span> | </span>-->
+<!--        <router-link to="/screen">Screen</router-link>-->
+<!--      </template>-->
+<!--    </nav>-->
+    <Menu :menu-list="menuList"></Menu>
     <router-view/>
   </div>
 </template>
 
 <script>
+import Menu from '@/components/Menu'
+
 export default {
   name: 'App',
+  components: { Menu },
   data() {
     return {
-      hasLogin: false
+      hasLogin: false,
+      menuList: [
+        { path: '/', title: 'Login' },
+        { path: '/home', title: 'Devices' },
+        { path: '/video-call', title: 'VideoCall' },
+        { path: '/video', title: 'Video' },
+        { path: '/audio', title: 'Audio' },
+        { path: '/screen', title: 'Screen' }
+      ]
     }
   },
   methods: {
@@ -53,18 +65,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
 }
 </style>
