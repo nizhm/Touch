@@ -12,7 +12,7 @@ const routes = [
   {
     path: '/home',
     name: 'home',
-    component: () => import('../views/HomeView')
+    component: () => import('../views/home')
   },
   {
     path: '/video-call',
