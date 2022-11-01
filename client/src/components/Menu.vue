@@ -2,7 +2,7 @@
   <nav class="menu">
     <ul class="menu-list">
       <li
-        v-for="(menu, idx) in menuList"
+        v-for="(route, idx) in visibleMenuList"
         :key="idx"
         class="menu-item"
       >
@@ -11,9 +11,9 @@
           class="divider"
         >|</span>
         <router-link
-          :to="menu.path"
+          :to="route.path"
           class="link"
-        >{{ menu.title }}</router-link>
+        >{{ route.meta.title }}</router-link>
       </li>
     </ul>
   </nav>
@@ -22,10 +22,10 @@
 <script>
 export default {
   name: 'Menu',
-  props: {
-    menuList: {
-      type: Array,
-      default: () => []
+  computed: {
+    visibleMenuList() {
+      const routes = this.$router.options.routes
+      return routes.filter(route => !route.hidden)
     }
   }
 }

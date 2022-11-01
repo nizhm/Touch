@@ -15,7 +15,7 @@
 <!--        <router-link to="/screen">Screen</router-link>-->
 <!--      </template>-->
 <!--    </nav>-->
-    <Menu :menu-list="menuList"></Menu>
+    <Menu></Menu>
     <router-view/>
   </div>
 </template>
@@ -28,15 +28,7 @@ export default {
   components: { Menu },
   data() {
     return {
-      hasLogin: false,
-      menuList: [
-        { path: '/', title: 'Login' },
-        { path: '/home', title: 'Devices' },
-        { path: '/video-call', title: 'VideoCall' },
-        { path: '/video', title: 'Video' },
-        { path: '/audio', title: 'Audio' },
-        { path: '/screen', title: 'Screen' }
-      ]
+      hasLogin: false
     }
   },
   methods: {
